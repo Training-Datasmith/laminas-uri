@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Uri;
 
 use function preg_match;
 use function str_replace;
-use function strpos;
 
 /**
  * File URI handler

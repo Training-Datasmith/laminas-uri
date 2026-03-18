@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Uri;
 
 use Laminas\Validator\EmailAddress as EmailValidator;
 use Laminas\Validator\ValidatorInterface;
-
-use function strpos;
 
 /**
  * "Mailto" URI handler

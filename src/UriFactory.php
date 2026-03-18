@@ -1,14 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Uri;
 
-use Laminas\Uri\File;
-use Laminas\Uri\Http;
-use Laminas\Uri\Mailto;
-use Laminas\Uri\Uri;
-
-use function gettype;
-use function is_object;
 use function is_string;
 use function sprintf;
 use function strtolower;

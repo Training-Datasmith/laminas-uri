@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Uri;
 
 use function array_key_exists;
 use function explode;
-use function strpos;
 
 /**
  * HTTP URI handler

@@ -1,26 +1,33 @@
 <?php
 
-namespace Laminas\Uri;
+declare(strict_types=1);
 
-use Exception as PhpException;
-use Laminas\Escaper\Escaper;
-use Laminas\Validator;
+namespace Laminas\Uri;
 
 use function array_intersect_assoc;
 use function array_pop;
 use function array_unshift;
+
+use Exception as PhpException;
+
 use function explode;
-use function gettype;
 use function http_build_query;
 use function implode;
 use function in_array;
 use function is_array;
-use function is_object;
 use function is_string;
+
+use Laminas\Escaper\Escaper;
+use Laminas\Validator;
+
 use function parse_str;
 use function preg_match;
 use function preg_replace_callback;
 use function preg_split;
+
+use const PREG_SPLIT_DELIM_CAPTURE;
+use const PREG_SPLIT_NO_EMPTY;
+
 use function rawurldecode;
 use function sprintf;
 use function str_replace;
@@ -28,11 +35,9 @@ use function strlen;
 use function strpos;
 use function strrpos;
 use function strtolower;
+
 use function strtoupper;
 use function substr;
-
-use const PREG_SPLIT_DELIM_CAPTURE;
-use const PREG_SPLIT_NO_EMPTY;
 
 /**
  * Generic URI handler
@@ -401,11 +406,11 @@ class Uri implements UriInterface
         }
 
         if ($this->query) {
-            $uri .= "?" . static::encodeQueryFragment($this->query);
+            $uri .= '?' . static::encodeQueryFragment($this->query);
         }
 
         if ($this->fragment) {
-            $uri .= "#" . static::encodeQueryFragment($this->fragment);
+            $uri .= '#' . static::encodeQueryFragment($this->fragment);
         }
 
         return $uri;
@@ -980,7 +985,7 @@ class Uri implements UriInterface
 
         $regex   = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:]|%(?![A-Fa-f0-9]{2}))/';
         $escaper = static::getEscaper();
-        $replace = (fn($match) => $escaper->escapeUrl($match[0]));
+        $replace = (fn ($match) => $escaper->escapeUrl($match[0]));
 
         return preg_replace_callback($regex, $replace, $userInfo);
     }
@@ -1006,7 +1011,7 @@ class Uri implements UriInterface
 
         $regex   = '/(?:[^' . self::CHAR_UNRESERVED . ')(:@&=\+\$,\/;%]+|%(?![A-Fa-f0-9]{2}))/';
         $escaper = static::getEscaper();
-        $replace = (fn($match) => $escaper->escapeUrl($match[0]));
+        $replace = (fn ($match) => $escaper->escapeUrl($match[0]));
 
         return preg_replace_callback($regex, $replace, $path);
     }
@@ -1033,7 +1038,7 @@ class Uri implements UriInterface
 
         $regex   = '/(?:[^' . self::CHAR_UNRESERVED . self::CHAR_SUB_DELIMS . '%:@\/\?]+|%(?![A-Fa-f0-9]{2}))/';
         $escaper = static::getEscaper();
-        $replace = (fn($match) => $escaper->escapeUrl($match[0]));
+        $replace = (fn ($match) => $escaper->escapeUrl($match[0]));
 
         return preg_replace_callback($regex, $replace, $input);
     }

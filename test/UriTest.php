@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\Uri;
 
+use function call_user_func_array;
+
 use Laminas\Uri\Exception as UriException;
 use Laminas\Uri\Uri;
 use PHPUnit\Framework\TestCase;
+
+use function serialize;
+
 use stdClass;
 
-use function call_user_func_array;
-use function serialize;
 use function strtolower;
 use function ucfirst;
 use function urlencode;
@@ -934,8 +937,8 @@ class UriTest extends TestCase
             ['with#pound', 'with%23pound'],
             ['with space', 'with%20space'],
             ['test=a&var[]=1&var[]=2&some[thing]=3', 'test=a&var%5B%5D=1&var%5B%5D=2&some%5Bthing%5D=3'],
-            ["with \nline break", "with%20%0Aline%20break"],
-            ["with%percent", "with%25percent"],
+            ["with \nline break", 'with%20%0Aline%20break'],
+            ['with%percent', 'with%25percent'],
         ];
     }
 
