@@ -41,9 +41,8 @@ class File extends Uri
      * @see    Uri::setUserInfo()
      *
      * @param  string $userInfo
-     * @return File
      */
-    public function setUserInfo($userInfo)
+    public function setUserInfo($userInfo): static
     {
         return $this;
     }
@@ -54,9 +53,8 @@ class File extends Uri
      * @see    Uri::setFragment()
      *
      * @param  string $fragment
-     * @return File
      */
-    public function setFragment($fragment)
+    public function setFragment($fragment): static
     {
         return $this;
     }
@@ -65,12 +63,11 @@ class File extends Uri
      * Convert a UNIX file path to a valid file:// URL
      *
      * @param  string $path
-     * @return File
      */
-    public static function fromUnixPath($path)
+    public static function fromUnixPath($path): static
     {
         $url = new static('file:');
-        if (0 === strpos($path, '/')) {
+        if (str_starts_with($path, '/')) {
             $url->setHost('');
         }
 
@@ -82,9 +79,8 @@ class File extends Uri
      * Convert a Windows file path to a valid file:// URL
      *
      * @param  string $path
-     * @return File
      */
-    public static function fromWindowsPath($path)
+    public static function fromWindowsPath($path): static
     {
         $url = new static('file:');
 

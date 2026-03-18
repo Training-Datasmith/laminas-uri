@@ -46,7 +46,7 @@ abstract class UriFactory
      * @param string $scheme
      * @param string $class
      */
-    public static function registerScheme($scheme, $class)
+    public static function registerScheme($scheme, $class): void
     {
         $scheme                         = strtolower($scheme);
         static::$schemeClasses[$scheme] = $class;
@@ -57,7 +57,7 @@ abstract class UriFactory
      *
      * @param string $scheme
      */
-    public static function unregisterScheme($scheme)
+    public static function unregisterScheme($scheme): void
     {
         $scheme = strtolower($scheme);
         if (isset(static::$schemeClasses[$scheme])) {
@@ -95,7 +95,7 @@ abstract class UriFactory
         if (! is_string($uriString)) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Expecting a string, received "%s"',
-                is_object($uriString) ? $uriString::class : gettype($uriString)
+                get_debug_type($uriString)
             ));
         }
 

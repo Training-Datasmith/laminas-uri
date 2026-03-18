@@ -44,7 +44,7 @@ class Mailto extends Uri
             return false;
         }
 
-        if (0 === strpos($this->path, '/')) {
+        if (str_starts_with($this->path, '/')) {
             return false;
         }
 
@@ -79,10 +79,8 @@ class Mailto extends Uri
 
     /**
      * Set validator to use when validating email address
-     *
-     * @return Mailto
      */
-    public function setValidator(ValidatorInterface $validator)
+    public function setValidator(ValidatorInterface $validator): static
     {
         $this->emailValidator = $validator;
         return $this;

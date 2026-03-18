@@ -86,9 +86,8 @@ class Http extends Uri
      * Set the username part (before the ':') of the userInfo URI part
      *
      * @param string|null $user
-     * @return self
      */
-    public function setUser($user)
+    public function setUser($user): static
     {
         $this->user = null === $user ? null : (string) $user;
 
@@ -101,9 +100,8 @@ class Http extends Uri
      * Set the password part (after the ':') of the userInfo URI part
      *
      * @param  string $password
-     * @return self
      */
-    public function setPassword($password)
+    public function setPassword($password): static
     {
         $this->password = null === $password ? null : (string) $password;
 
@@ -116,10 +114,9 @@ class Http extends Uri
      * Set the URI User-info part (usually user:password)
      *
      * @param  string|null $userInfo
-     * @return self
      * @throws Exception\InvalidUriPartException If the schema definition does not have this part.
      */
-    public function setUserInfo($userInfo)
+    public function setUserInfo($userInfo): static
     {
         $this->userInfo = null === $userInfo ? null : (string) $userInfo;
 
@@ -162,7 +159,7 @@ class Http extends Uri
         }
 
         // If no ':' separator, we only have a username
-        if (false === strpos($this->userInfo, ':')) {
+        if (!str_contains($this->userInfo, ':')) {
             $this->setUser($this->userInfo);
             $this->setPassword(null);
             return;
@@ -212,9 +209,8 @@ class Http extends Uri
      * Parse a URI string
      *
      * @param  string $uri
-     * @return Http
      */
-    public function parse($uri)
+    public function parse($uri): static
     {
         parent::parse($uri);
 
