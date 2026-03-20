@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Uri;
 
 use function preg_match;
 use function str_replace;
-
 /**
  * File URI handler
  *
@@ -15,8 +13,7 @@ use function str_replace;
 class File extends Uri
 {
     /** @var array<int,string> */
-    protected static $validSchemes = ['file'];
-
+    protected static $valid_schemes = ['file'];
     /**
      * Check if the URI is a valid File URI
      *
@@ -27,15 +24,13 @@ class File extends Uri
      *
      * @return bool
      */
-    public function isValid()
+    public function is_valid()
     {
         if ($this->query) {
             return false;
         }
-
-        return parent::isValid();
+        return parent::is_valid();
     }
-
     /**
      * User Info part is not used in file URIs
      *
@@ -43,11 +38,10 @@ class File extends Uri
      *
      * @param  string $userInfo
      */
-    public function setUserInfo($userInfo): static
+    public function set_user_info($user_info): static
     {
         return $this;
     }
-
     /**
      * Fragment part is not used in file URIs
      *
@@ -55,45 +49,39 @@ class File extends Uri
      *
      * @param  string $fragment
      */
-    public function setFragment($fragment): static
+    public function set_fragment($fragment): static
     {
         return $this;
     }
-
     /**
      * Convert a UNIX file path to a valid file:// URL
      *
      * @param  string $path
      */
-    public static function fromUnixPath($path): static
+    public static function from_unix_path($path): static
     {
         $url = new static('file:');
         if (str_starts_with($path, '/')) {
-            $url->setHost('');
+            $url->set_host('');
         }
-
-        $url->setPath($path);
+        $url->set_path($path);
         return $url;
     }
-
     /**
      * Convert a Windows file path to a valid file:// URL
      *
      * @param  string $path
      */
-    public static function fromWindowsPath($path): static
+    public static function from_windows_path($path): static
     {
         $url = new static('file:');
-
         // Convert directory separators
         $path = str_replace(['/', '\\'], ['%2F', '/'], $path);
-
         // Is this an absolute path?
         if (preg_match('|^([a-zA-Z]:)?/|', $path)) {
-            $url->setHost('');
+            $url->set_host('');
         }
-
-        $url->setPath($path);
+        $url->set_path($path);
         return $url;
     }
 }

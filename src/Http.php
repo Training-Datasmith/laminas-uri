@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Uri;
 
 use function array_key_exists;
 use function explode;
-
 /**
  * HTTP URI handler
  */
@@ -17,115 +15,92 @@ class Http extends Uri
      *
      * @var array<int,string>
      */
-    protected static $validSchemes = [
-        'http',
-        'https',
-    ];
-
+    protected static $valid_schemes = ['http', 'https'];
     /**
      * @see Uri::$defaultPorts
      *
      * @var array<string,int>
      */
-    protected static $defaultPorts = [
-        'http'  => 80,
-        'https' => 443,
-    ];
-
+    protected static $default_ports = ['http' => 80, 'https' => 443];
     /**
      * @see Uri::$validHostTypes
      *
      * @var int
      */
-    protected $validHostTypes = self::HOST_DNS_OR_IPV4_OR_IPV6_OR_REGNAME;
-
+    protected $valid_host_types = self::HOST_DNS_OR_IPV4_OR_IPV6_OR_REGNAME;
     /**
      * User name as provided in authority of URI
      *
      * @var null|string
      */
     protected $user;
-
     /**
      * Password as provided in authority of URI
      *
      * @var null|string
      */
     protected $password;
-
     /**
      * Get the username part (before the ':') of the userInfo URI part
      *
      * @return string|null
      */
-    public function getUser()
+    public function get_user()
     {
         return $this->user;
     }
-
     /**
      * Get the password part (after the ':') of the userInfo URI part
      *
      * @return string|null
      */
-    public function getPassword()
+    public function get_password()
     {
         return $this->password;
     }
-
     /**
      * Get the User-info (usually user:password) part
      *
      * @return string|null
      */
-    public function getUserInfo()
+    public function get_user_info()
     {
-        return $this->userInfo;
+        return $this->user_info;
     }
-
     /**
      * Set the username part (before the ':') of the userInfo URI part
      *
      * @param string|null $user
      */
-    public function setUser($user): static
+    public function set_user($user): static
     {
         $this->user = null === $user ? null : (string) $user;
-
-        $this->buildUserInfo();
-
+        $this->build_user_info();
         return $this;
     }
-
     /**
      * Set the password part (after the ':') of the userInfo URI part
      *
      * @param  string $password
      */
-    public function setPassword($password): static
+    public function set_password($password): static
     {
         $this->password = null === $password ? null : (string) $password;
-
-        $this->buildUserInfo();
-
+        $this->build_user_info();
         return $this;
     }
-
     /**
      * Set the URI User-info part (usually user:password)
      *
      * @param  string|null $userInfo
      * @throws Exception\InvalidUriPartException If the schema definition does not have this part.
      */
-    public function setUserInfo($userInfo): static
+    public function set_user_info($user_info): static
     {
-        $this->userInfo = null === $userInfo ? null : (string) $userInfo;
-
-        $this->parseUserInfo();
-
+        $this->user_info = null === $user_info ? null : (string) $user_info;
+        $this->parse_user_info();
         return $this;
     }
-
     /**
      * Validate the host part of an HTTP URI
      *
@@ -136,11 +111,10 @@ class Http extends Uri
      * @param  int $allowed
      * @return bool
      */
-    public static function validateHost($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
+    public static function validate_host($host, $allowed = self::HOST_DNS_OR_IPV4_OR_IPV6)
     {
-        return parent::validateHost($host, $allowed);
+        return parent::validate_host($host, $allowed);
     }
-
     /**
      * Parse the user info into username and password segments
      *
@@ -149,27 +123,23 @@ class Http extends Uri
      *
      * @return void
      */
-    protected function parseUserInfo()
+    protected function parse_user_info()
     {
         // No user information? we're done
-        if (null === $this->userInfo) {
-            $this->setUser(null);
-            $this->setPassword(null);
-
+        if (null === $this->user_info) {
+            $this->set_user(null);
+            $this->set_password(null);
             return;
         }
-
         // If no ':' separator, we only have a username
-        if (!str_contains($this->userInfo, ':')) {
-            $this->setUser($this->userInfo);
-            $this->setPassword(null);
+        if (!str_contains($this->user_info, ':')) {
+            $this->set_user($this->user_info);
+            $this->set_password(null);
             return;
         }
-
         // Split on the ':', and set both user and password
-        [$this->user, $this->password] = explode(':', $this->userInfo, 2);
+        [$this->user, $this->password] = explode(':', $this->user_info, 2);
     }
-
     /**
      * Build the user info based on user and password
      *
@@ -177,15 +147,14 @@ class Http extends Uri
      *
      * @return void
      */
-    protected function buildUserInfo()
+    protected function build_user_info()
     {
         if (null !== $this->password) {
-            $this->userInfo = $this->user . ':' . $this->password;
+            $this->user_info = $this->user . ':' . $this->password;
         } else {
-            $this->userInfo = $this->user;
+            $this->user_info = $this->user;
         }
     }
-
     /**
      * Return the URI port
      *
@@ -195,17 +164,16 @@ class Http extends Uri
      *
      * @return int
      */
-    public function getPort()
+    public function get_port()
     {
         if (empty($this->port)) {
             $scheme = $this->scheme ?? '';
-            if (array_key_exists($scheme, static::$defaultPorts)) {
-                return static::$defaultPorts[$this->scheme];
+            if (array_key_exists($scheme, static::$default_ports)) {
+                return static::$default_ports[$this->scheme];
             }
         }
         return $this->port;
     }
-
     /**
      * Parse a URI string
      *
@@ -214,11 +182,9 @@ class Http extends Uri
     public function parse($uri): static
     {
         parent::parse($uri);
-
         if (empty($this->path)) {
             $this->path = '/';
         }
-
         return $this;
     }
 }

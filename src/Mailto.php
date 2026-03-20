@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Uri;
 
-use Laminas\Validator\EmailAddress as EmailValidator;
-use Laminas\Validator\ValidatorInterface;
-
+use Laminas\Validator\Email_Address as EmailValidator;
+use Laminas\Validator\Validator_Interface;
 /**
  * "Mailto" URI handler
  *
@@ -15,15 +13,13 @@ use Laminas\Validator\ValidatorInterface;
 class Mailto extends Uri
 {
     /** @var array<int,string> */
-    protected static $validSchemes = ['mailto'];
-
+    protected static $valid_schemes = ['mailto'];
     /**
      * Validator for use when validating email address
      *
      * @var ValidatorInterface
      */
-    protected $emailValidator;
-
+    protected $email_validator;
     /**
      * Check if the URI is a valid Mailto URI
      *
@@ -34,24 +30,20 @@ class Mailto extends Uri
      *
      * @return bool
      */
-    public function isValid()
+    public function is_valid()
     {
-        if ($this->host || $this->userInfo || $this->port) {
+        if ($this->host || $this->user_info || $this->port) {
             return false;
         }
-
         if (empty($this->path)) {
             return false;
         }
-
         if (str_starts_with($this->path, '/')) {
             return false;
         }
-
-        $validator = $this->getValidator();
-        return $validator->isValid($this->path);
+        $validator = $this->get_validator();
+        return $validator->is_valid($this->path);
     }
-
     /**
      * Set the email address
      *
@@ -60,11 +52,10 @@ class Mailto extends Uri
      * @param  string $email
      * @return Mailto
      */
-    public function setEmail($email)
+    public function set_email($email)
     {
-        return $this->setPath($email);
+        return $this->set_path($email);
     }
-
     /**
      * Get the email address
      *
@@ -72,20 +63,18 @@ class Mailto extends Uri
      *
      * @return string
      */
-    public function getEmail()
+    public function get_email()
     {
-        return $this->getPath();
+        return $this->get_path();
     }
-
     /**
      * Set validator to use when validating email address
      */
-    public function setValidator(ValidatorInterface $validator): static
+    public function set_validator(Validator_Interface $validator): static
     {
-        $this->emailValidator = $validator;
+        $this->email_validator = $validator;
         return $this;
     }
-
     /**
      * Retrieve validator for use with validating email address
      *
@@ -94,11 +83,11 @@ class Mailto extends Uri
      *
      * @return ValidatorInterface
      */
-    public function getValidator()
+    public function get_validator()
     {
-        if (null === $this->emailValidator) {
-            $this->setValidator(new EmailValidator());
+        if (null === $this->email_validator) {
+            $this->set_validator(new Email_Validator());
         }
-        return $this->emailValidator;
+        return $this->email_validator;
     }
 }

@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Laminas\Uri;
 
 /**
  * Interface defining a URI
  */
-interface UriInterface
+interface Uri_Interface
 {
     /**
      * Create a new URI object
@@ -16,7 +15,6 @@ interface UriInterface
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($uri = null);
-
     /**
      * Check if the URI is valid
      *
@@ -24,22 +22,19 @@ interface UriInterface
      *
      * @return bool
      */
-    public function isValid();
-
+    public function is_valid();
     /**
      * Check if the URI is a valid relative URI
      *
      * @return bool
      */
-    public function isValidRelative();
-
+    public function is_valid_relative();
     /**
      * Check if the URI is an absolute or relative URI
      *
      * @return bool
      */
-    public function isAbsolute();
-
+    public function is_absolute();
     /**
      * Parse a URI string
      *
@@ -47,15 +42,13 @@ interface UriInterface
      * @return Uri
      */
     public function parse($uri);
-
     /**
      * Compose the URI into a string
      *
      * @return string
      * @throws Exception\InvalidUriException
      */
-    public function toString();
-
+    public function to_string();
     /**
      * Normalize the URI
      *
@@ -70,7 +63,6 @@ interface UriInterface
      * @return Uri
      */
     public function normalize();
-
     /**
      * Convert the link to a relative link by substracting a base URI
      *
@@ -83,50 +75,43 @@ interface UriInterface
      * @param  Uri|string $baseUri
      * @return Uri
      */
-    public function makeRelative($baseUri);
-
+    public function make_relative($base_uri);
     /**
      * Get the scheme part of the URI
      *
      * @return string|null
      */
-    public function getScheme();
-
+    public function get_scheme();
     /**
      * Get the User-info (usually user:password) part
      *
      * @return string|null
      */
-    public function getUserInfo();
-
+    public function get_user_info();
     /**
      * Get the URI host
      *
      * @return string|null
      */
-    public function getHost();
-
+    public function get_host();
     /**
      * Get the URI port
      *
      * @return int|null
      */
-    public function getPort();
-
+    public function get_port();
     /**
      * Get the URI path
      *
      * @return string|null
      */
-    public function getPath();
-
+    public function get_path();
     /**
      * Get the URI query
      *
      * @return string|null
      */
-    public function getQuery();
-
+    public function get_query();
     /**
      * Return the query string as an associative array of key => value pairs
      *
@@ -135,15 +120,13 @@ interface UriInterface
      *
      * @return array
      */
-    public function getQueryAsArray();
-
+    public function get_query_as_array();
     /**
      * Get the URI fragment
      *
      * @return string|null
      */
-    public function getFragment();
-
+    public function get_fragment();
     /**
      * Set the URI scheme
      *
@@ -159,8 +142,7 @@ interface UriInterface
      * @throws Exception\InvalidUriPartException
      * @return Uri
      */
-    public function setScheme($scheme);
-
+    public function set_scheme($scheme);
     /**
      * Set the URI User-info part (usually user:password)
      *
@@ -168,8 +150,7 @@ interface UriInterface
      * @return Uri
      * @throws Exception\InvalidUriPartException If the schema definition does not have this part.
      */
-    public function setUserInfo($userInfo);
-
+    public function set_user_info($user_info);
     /**
      * Set the URI host
      *
@@ -188,24 +169,21 @@ interface UriInterface
      * @throws Exception\InvalidUriPartException
      * @return Uri
      */
-    public function setHost($host);
-
+    public function set_host($host);
     /**
      * Set the port part of the URI
      *
      * @param  int $port
      * @return Uri
      */
-    public function setPort($port);
-
+    public function set_port($port);
     /**
      * Set the path
      *
      * @param  string $path
      * @return Uri
      */
-    public function setPath($path);
-
+    public function set_path($path);
     /**
      * Set the query string
      *
@@ -216,8 +194,7 @@ interface UriInterface
      * @param  string|array $query
      * @return Uri
      */
-    public function setQuery($query);
-
+    public function set_query($query);
     /**
      * Set the URI fragment part
      *
@@ -225,8 +202,7 @@ interface UriInterface
      * @return Uri
      * @throws Exception\InvalidUriPartException If the schema definition does not have this part.
      */
-    public function setFragment($fragment);
-
+    public function set_fragment($fragment);
     /**
      * Magic method to convert the URI to a string
      *
