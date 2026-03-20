@@ -1,6 +1,6 @@
 {
     "name": "laminas/laminas-uri",
-    "description": "A component that aids in manipulating and validating \u00bb Uniform Resource Identifiers (URIs)",
+    "description": "A component that aids in manipulating and validating » Uniform Resource Identifiers (URIs)",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
@@ -21,8 +21,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "extra": {
-    },
+    "extra": [],
     "require": {
         "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
         "laminas/laminas-escaper": "^2.9",
@@ -39,7 +38,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Uri\\": "test/"
+            "Laminas_Test\\Uri\\": "test/"
         }
     },
     "scripts": {
